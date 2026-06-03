@@ -2,23 +2,34 @@ import { useState } from "react";
 
 function App() {
 
-  const[budget,setBudget] =useState(0);
+  const[budget,setBudget] =useState("");
   const[expense,setExpense]=useState("");
-  const[amount,setAmount] =useState(0);
+  const[amount,setAmount] =useState("");
   const[list,setList]=useState([]);
 
   function clickbtn(){
+    if(expense!==""&&amount!==""){
     const newItem ={
       expense: expense,
       amount: amount
     };
     setList([...list,newItem]);
-    console.log(list);
+    console.log(newItem);
 
     //input clear karo 
     setExpense("");
-    setAmount(0);
+    setAmount("");
   }
+  }
+
+function deletebtn(index) {
+  const updatedItems = list.filter((_, i) => i !== index);
+  setList(updatedItems);
+}
+
+const total = list.reduce((sum, item) => sum + item.amount, 0);
+const remaining = total? Number(budget)- total:0;
+
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
@@ -27,11 +38,11 @@ function App() {
       </h1>
       <div className="mx-auto mt-20 w-225">
       <h2 className="font-bold ">
-        Balance:
+        Balance:{remaining}
       </h2>
 
       <div className="flex justify-between items-center mt-3">
-        <h2>Expense:0</h2>
+        <h2>Expense:{total}</h2>
         <div className=" flex gap-2">
         <p>budget</p>
         <input value={budget} onChange={(e)=>setBudget(Number(e.target.value))} className="border px-2 py-1 w-50" type="number" placeholder="enter budget"/>
@@ -56,11 +67,13 @@ function App() {
       </div>
 
         {list.map((item,index)=>{
-        <div key={index} className="flex justify-between mt-10">
-        <p>item.birthday Part</p>
-         <p>item.500</p>
-         <button>delete</button>
+        return (
+        <div key={index} className="flex justify-between mt-5">
+        <p>{item.expense}</p>
+         <p>{item.amount}</p>
+         <button onClick={()=>deletebtn(index)} className=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 w-20 rounded-2xl">delete</button>
         </div>
+        )
         })}
 
       </div>
