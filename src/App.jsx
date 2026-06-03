@@ -38,11 +38,11 @@ const remaining = total? Number(budget)- total:0;
       </h1>
       <div className="mx-auto mt-20 w-225">
       <h2 className="font-bold ">
-        Balance:{remaining}
+        Balance: {remaining}
       </h2>
 
       <div className="flex justify-between items-center mt-3">
-        <h2>Expense:{total}</h2>
+        <h2>Expense: {total}</h2>
         <div className=" flex gap-2">
         <p>budget</p>
         <input value={budget} onChange={(e)=>setBudget(Number(e.target.value))} className="border px-2 py-1 w-50" type="number" placeholder="enter budget"/>
@@ -66,15 +66,21 @@ const remaining = total? Number(budget)- total:0;
         <input className="border px-2 py-1 w-100" type="text" placeholder="search expenses" />
       </div>
 
-        {list.map((item,index)=>{
-        return (
-        <div key={index} className="flex justify-between mt-5">
-        <p>{item.expense}</p>
-         <p>{item.amount}</p>
-         <button onClick={()=>deletebtn(index)} className=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 w-20 rounded-2xl">delete</button>
-        </div>
-        )
-        })}
+      {list.map((item,index)=>{
+       return (
+       <table key={index} className="w-full mt-5">
+      <tr className="grid grid-cols-3 items-center border-b pb-2">
+        <td className="text-left">{item.expense}</td>
+
+        <td className="text-center">{item.amount}</td>
+
+        <td className="text-right">
+          <button onClick={() => deletebtn(index)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 w-20 rounded-2xl">delete</button>
+        </td>
+      </tr>
+    </table>
+  )
+})}
 
       </div>
       
