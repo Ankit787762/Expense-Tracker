@@ -61,4 +61,4 @@ npm run dev
 
 ## Author
 
-Ankit 
+Ankit Swami
