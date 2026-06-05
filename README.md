@@ -1,4 +1,3 @@
-
 # Expense Tracker
 
 Expense Tracker is a responsive web application built using React.js and Vite that helps users manage their daily expenses efficiently.
